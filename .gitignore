@@ -1,3 +1,8 @@
 config.js
 custom.css
 .DS_Store
+
+# IDE/Editors files
+*.komodoproject
+*.sublime-project
+*.sublime-workspace
