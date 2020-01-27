@@ -469,6 +469,12 @@ function HandleDragEnter(e) {
 }
 
 function HandleDragLeave(e) {
+	// Some nodes don't have a getAttribute (e.g. text nodes),
+	// so ignore them for now
+	if (!$.isFunction(e.target.getAttribute)) {
+		return;
+	}
+
 	var storyID = e.target.getAttribute("storyid");
 	if(storyID != previousDragOverItem) return false;
 
