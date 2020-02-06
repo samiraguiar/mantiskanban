@@ -11,16 +11,16 @@
 ##Step 1: Add localiztion files
 Path is i18n/lang/{lang}.js .
 File name is {lang}.js. Ex: zh-TW.js for traditional Chinese
-Context: 
+Context:
 var langObj = {
 		//"stringId": "stringContext",
-		"delete": "刪除", 
+		"delete": "刪除",
 		"add": "新增"
 	};
 
 ##Step 2: Load script in html
 <script language="javascript" type="text/javascript" src="i18n/i18n.js"></script>
-	
+
 ##Step 3: Lookup "stringContext" by "stringId" in html
 <div>delete</div>
 sould be changed to
@@ -29,18 +29,18 @@ sould be changed to
 
 $(function(){
 	//load language file
-	var userLang = (navigator.language || navigator.userLanguage).toLowerCase(); 
+	var userLang = (navigator.language || navigator.userLanguage).toLowerCase();
  	// alert ("The language is: " + userLang);
 
  	if( userLang=="zh-tw" ){
- 		loadScript("i18n/lang/zh-tw.js", onLangLoaded);
- 	} 
+ 		loadScript("js/i18n/lang/zh-tw.js", onLangLoaded);
+ 	}
 	else if( userLang=="en-us" ){
-		loadScript("i18n/lang/en-us.js", onLangLoaded);
+		loadScript("js/i18n/lang/en-us.js", onLangLoaded);
  	}
 	else {
 		//default to en-us
-		loadScript("i18n/lang/en-us.js", onLangLoaded);
+		loadScript("js/i18n/lang/en-us.js", onLangLoaded);
 	}
 
 });
