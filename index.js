@@ -39,7 +39,7 @@ function window_load() {
 
 	document.getElementById('newAttachmentFile').addEventListener('change', HandleFileSelect, false);
 
-	var preConfiguredMantisURL = DefaultSettings.connectURL;
+	var preConfiguredMantisURL = DefaultSettings.connectURL || Mantis.ConnectURL;
 
 	LoadSettingsFromLocalStorage();
 
