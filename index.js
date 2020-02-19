@@ -66,11 +66,11 @@ function window_load() {
     
 	AutoLogin();
 
-
-/*	$(document).bind('keyup', 'shift+ctrl+g', function() {
-		document.getElementById("searchfield").focus();
-	});*/
-
+	if (urlParams.username && urlParams.cookie_id) {
+		Login(urlParams.username, urlParams.cookie_id);
+	} else {
+		ShowLoginArea();
+	}
 }
 
   function HandleFileSelect(evt) {
@@ -132,16 +132,23 @@ function get_gravatar(email, size) {
 }
 
  
-function Login() {
+function Login(username, password) {
 	log("Login() called.");
 	
 	document.getElementById("username").focus();
 	Mantis.ConnectURL = document.getElementById("mantisURL").value;
 	
+	if (!username) {
+		username = document.getElementById("username").value;
+	}
+	if (!password) {
+		password = document.getElementById("password").value;
+	}
+
 	try {
-		var retObj = Mantis.Login(document.getElementById("username").value, document.getElementById("password").value);
+		var retObj = Mantis.Login(username, password);
 		Kanban.CurrentUser = new KanbanUser(retObj.account_data);
-		Kanban.CurrentUser.Password = document.getElementById("password").value;
+		Kanban.CurrentUser.Password = password;
 	} catch (e) {
 		var form = document.getElementById("loginButton");
 		$(form).before('<center><div class="alert alert-danger text-center" style="width:320px !important"><b>Error:</b> ' + e.message + '<button type="button" class="close" data-dismiss="alert">&times;</button></div><center>');
@@ -154,7 +161,7 @@ function Login() {
 	StartLoading();
 	
 	//put the user-entered data into the DefaultSettings array.
-	DefaultSettings.username = document.getElementById("username").value;
+	DefaultSettings.username = username;
 	DefaultSettings.stayLoggedIn = 1;
 	DefaultSettings.lastAccessTime = Math.round(new Date().getTime() / 1000);
 
